@@ -1,63 +1,147 @@
-# git-undo
+<div align="center">
 
-A CLI tool to fix Git mistakes using natural language powered by multiple AI providers.
+# 🛠️ git-undo
 
-## Supported Providers & Models
-- **OpenAI**: gpt-4o, gpt-4o-mini, etc.
-- **OpenRouter**: Access to 100+ models (Anthropic, OpenAI, DeepSeek, Gemini, etc.) with one API key
-- **Anthropic**: claude-sonnet-4-5, claude-opus-4-5, claude-haiku-3-5, etc.
-- **Gemini**: gemini-2.0-flash, gemini-1.5-pro, etc.
-- **DeepSeek**: deepseek-chat, deepseek-reasoner
-- **Ollama**: Local models like llama3.2, deepseek-r1, qwen2.5-coder, etc.
+**Fix Git mistakes using natural language—because we've all been there!**
 
-## Features
+[![Python Version](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Git](https://img.shields.io/badge/Git-Ready-orange.svg)](https://git-scm.com/)
 
-- Describe your Git mistake in plain English
-- Automatically analyzes your repository's current state
-- Generates and displays safe, context-aware Git commands with explanations
-- Flags destructive commands with prominent warnings
-- Requires explicit confirmation before executing commands
-- Real-time output streaming for executed commands
+</div>
 
-## Prerequisites
-Before installing git-undo, make sure you have:
-1. **Python 3.10 or higher**: Download from https://www.python.org/downloads/
-2. **Git**: Download from https://git-scm.com/downloads
-3. An API key from your preferred AI provider (e.g., OpenRouter, OpenAI, Anthropic, etc.)
+---
 
-## Installation
+## ✨ Features
 
-### Option 1: Install from PyPI (when published)
-```bash
-pip install git-undo
-```
+- 🎯 **Natural Language Interface**: Just describe your mistake in plain English
+- 🔍 **Context-Aware**: Automatically analyzes your repo's current state (branch, commits, status, stashes)
+- 📝 **Explanations Included**: Every command comes with a clear explanation
+- ⚠️ **Destructive Command Warnings**: Prominently flags commands like `git reset --hard` or `git push --force`
+- 👀 **Dry-Run Mode**: Preview commands before executing anything
+- ✅ **Confirmation Required**: No commands run without your explicit approval
+- 🎨 **Beautiful UI**: Powered by `rich` for a clean, colorful interface
+- 🌐 **Multi-Provider Support**: Use your favorite AI!
 
-### Option 2: Install from GitHub
+---
+
+## 🤖 Supported Providers & Models
+
+| Provider | Models | Notes |
+|----------|--------|-------|
+| **OpenAI** | gpt-4o, gpt-4o-mini, etc. | Great all-around choice |
+| **OpenRouter** | 100+ models (Anthropic, OpenAI, DeepSeek, Gemini, etc.) | One key for all models |
+| **Anthropic** | claude-sonnet-4-5, claude-opus-4-5, claude-haiku-3-5, etc. | Top-tier reasoning |
+| **Gemini** | gemini-2.0-flash, gemini-1.5-pro, etc. | Free tier available |
+| **DeepSeek** | deepseek-chat, deepseek-reasoner | Fast & affordable |
+| **Ollama** | llama3.2, deepseek-r1, qwen2.5-coder, etc. | 100% local, no API key needed |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+1. **Python 3.10+**: [Download Python](https://www.python.org/downloads/)
+2. **Git**: [Download Git](https://git-scm.com/downloads)
+3. An API key from your preferred provider
+
+### Installation
+#### Option 1: Install from GitHub (Recommended)
 ```bash
 pip install git+https://github.com/sahik67/git-undo.git
 ```
 
-### Option 3: Install from Local Source (Development)
-1. Clone or download the repo:
+#### Option 2: Install Locally (Development)
+```bash
+# Clone the repo
+git clone https://github.com/sahik67/git-undo.git
+cd git-undo
+
+# Create virtual environment (Windows)
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+
+# Create virtual environment (macOS/Linux)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install
+pip install -e .
+```
+
+### Configuration
+1. Copy the example `.env` file:
    ```bash
-   git clone https://github.com/sahik67/git-undo.git
-   cd git-undo
+   # Windows
+   Copy-Item .env.example .env
+   
+   # macOS/Linux
+   cp .env.example .env
    ```
-2. Create a virtual environment (optional but recommended):
-   - **Windows**:
-     ```powershell
-     python -m venv .venv
-     .venv\Scripts\Activate.ps1
-     ```
-   - **macOS/Linux**:
-     ```bash
-     python3 -m venv .venv
-     source .venv/bin/activate
-     ```
-3. Install the package in editable mode:
+
+2. Open `.env` and add your keys (here's an OpenRouter example):
+   ```env
+   GIT_UNDO_PROVIDER=openrouter
+   GIT_UNDO_MODEL=nex-agi/nex-n2-pro:free
+   OPENROUTER_API_KEY=sk-or-v1-...your-key...
+   ```
+
+### Usage
+```bash
+# Preview first (ALWAYS recommended!)
+git-undo "I accidentally committed to main" --dry-run
+
+# Fix for real
+git-undo "I accidentally committed to main"
+```
+
+---
+
+## 📖 A-Z Detailed Tutorial
+
+Check out the [full A-Z tutorial](#a-z-detailed-tutorial-1) in the README below!
+
+---
+
+## 📸 Demo
+
+![git-undo in action](./demo.gif)
+
+### How to Make Your Own Demo GIF
+1. Record with OBS Studio, Xbox Game Bar (Windows), or QuickTime Player (macOS)
+2. Convert to GIF using [ezgif.com](https://ezgif.com/) or ffmpeg:
    ```bash
-   pip install -e .
+   ffmpeg -i your-video.mp4 -vf "fps=10,scale=800:-1:flags=lanczos" demo.gif
    ```
+
+---
+
+## ⚙️ Configuration
+
+See the example `.env.example` file for all options!
+
+---
+
+## 🔒 Security Notes
+
+- 🔑 Your API keys are stored locally and **never** shared
+- ⚠️ Destructive commands always trigger a large warning
+- 👀 Always use `--dry-run` first to preview changes
+- ✅ No commands execute without your explicit confirmation
+
+---
+
+## 📄 License
+
+MIT License — See [LICENSE](./LICENSE) file for details!
+
+---
+
+<div align="center">
+Made with ❤️ by sahik
+</div>
+
+---
 
 ## A-Z Detailed Tutorial
 
@@ -111,54 +195,12 @@ Now let's fix our mistake using git-undo:
    ```bash
    git-undo "I accidentally committed wrong-file.txt" --dry-run
    ```
-   You should see:
-   ```
-   Suggested Commands:
-
-   ╭─────────────────────────── ⚠️  Command 1 (DESTRUCTIVE) ───────────────────────────╮
-   │ git reset --hard HEAD~1                                                          │
-   ╰───────────────────────────────────────────────────────────────────────────────────╯
-   Removes the last commit which added wrong-file.txt.
-
-   ╭────────────────────────── Destructive Commands Detected ──────────────────────────╮
-   │ ⚠️  WARNING: One or more commands are destructive and may result in data loss!    │
-   ╰───────────────────────────────────────────────────────────────────────────────────╯
-
-   Dry run complete - no commands executed
-   ```
+   You should see a beautiful UI with suggested commands!
 2. If you're happy with the commands, run git-undo without `--dry-run` to execute them:
    ```bash
    git-undo "I accidentally committed wrong-file.txt"
    ```
 3. Confirm the action when prompted, and git-undo will fix your mistake!
-
-## Configuration
-Create a `.env` file in your project or set environment variables:
-
-### Example .env File
-```env
-# Provider selection (options: openai, openrouter, anthropic, gemini, deepseek, ollama)
-GIT_UNDO_PROVIDER=openrouter
-GIT_UNDO_MODEL=~anthropic/claude-fable-latest
-
-# OpenAI API Key
-OPENAI_API_KEY=sk-...
-
-# OpenRouter API Key
-OPENROUTER_API_KEY=sk-or-v1-...
-
-# Anthropic API Key
-ANTHROPIC_API_KEY=sk-ant-...
-
-# Google (Gemini) API Key
-GOOGLE_API_KEY=...
-
-# DeepSeek API Key
-DEEPSEEK_API_KEY=sk-...
-
-# Ollama Base URL (default: http://localhost:11434/v1)
-OLLAMA_BASE_URL=http://localhost:11434/v1
-```
 
 ## Usage Examples
 
@@ -178,30 +220,3 @@ git-undo "I messed up the merge conflict resolution"
 # Undo a git push --force
 git-undo "I accidentally force pushed to main" --dry-run
 ```
-
-## Demo
-
-![git-undo in action](./demo.gif)
-
-### How to Create Your Own Demo GIF
-1. Install a screen recorder like:
-   - Windows: **OBS Studio** (free) or **Xbox Game Bar** (built-in)
-   - macOS: **OBS Studio** or **QuickTime Player** (built-in)
-   - Linux: **OBS Studio** or **Peek**
-2. Record a video of you using git-undo (follow the A-Z tutorial above)
-3. Convert the video to a GIF using an online tool like https://ezgif.com/ or a local tool like `ffmpeg`:
-   ```bash
-   ffmpeg -i your-recording.mp4 -vf "fps=10,scale=800:-1:flags=lanczos" demo.gif
-   ```
-4. Replace `demo.gif` in the repo with your new GIF!
-
-## Security Notes
-
-- git-undo flags and warns you about destructive commands (like `git push --force`, `git reset --hard`, etc.)
-- Always use `--dry-run` first to preview commands
-- No commands are executed without your explicit confirmation
-- Your API keys are stored locally and never shared
-
-## License
-
-MIT
