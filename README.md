@@ -2,11 +2,12 @@
 
 # 🛠️ git-undo
 
-**Fix Git mistakes using natural language—because we've all been there!**
+**Fix Git mistakes in plain English—before you panic-delete your repo!**
 
 [![Python Version](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Git](https://img.shields.io/badge/Git-Ready-orange.svg)](https://git-scm.com/)
+[![AI Providers](https://img.shields.io/badge/Supported%20by-6%20AI%20Providers-9cf.svg)](#-supported-providers--models)
 
 </div>
 
